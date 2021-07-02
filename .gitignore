@@ -1,0 +1,13 @@
+#.settings
+.settings/
+
+#testoutput
+test-output/*
+
+#project
+.project
+
+
+
+
+

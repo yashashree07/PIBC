@@ -12,7 +12,7 @@ Feature: Inward Payment flow feature
 
     Examples: 
       | ValueDateperiod | PaymentType        | Reference | SubRef | ChequeNo | AccountNumber |
-      |                 | ACH CHEQUE RECEIVE | Cheque No | EQUAL  | 30001169 |               |
+      |                 | ACH CHEQUE RECEIVE | Cheque No | EQUAL  | 30002168 |               |
       
       @TC_14_04_VIPInwardpaymentFlow
   Scenario Outline: VIP Inward payment Flow

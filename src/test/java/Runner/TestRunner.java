@@ -16,6 +16,6 @@ import io.cucumber.junit.CucumberOptions;
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
 		)
 
-public class TestRunner1 {
+public class TestRunner {
 
 }

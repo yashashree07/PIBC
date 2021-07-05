@@ -11,7 +11,7 @@ Feature: Inward Payment flow feature
 
     Examples: 
       | ValueDateperiod | PaymentType        | Reference | SubRef | ChequeNo | AccountNumber |
-      |                 | ACH CHEQUE RECEIVE | Cheque No | EQUAL  | 30002271 |               |
+      |                 | ACH CHEQUE RECEIVE | Cheque No | EQUAL  | 30002373 |               |
       
   @TC_14_04_VIPInwardpaymentFlow
   Scenario Outline: VIP Inward payment Flow
@@ -37,13 +37,13 @@ Feature: Inward Payment flow feature
     Then validate whether payment move to QueuedToFinalPosting using "<ValueDateperiod>","<PaymentType>","<Reference>","<SubRef>","<ChequeNo>","<AccountNumber>"
     Then validate whether payment move to QueuedToReturnCreation using "<ValueDateperiod>","<PaymentType>","<Reference>","<SubRef>","<ChequeNo>","<AccountNumber>"
     Then validate whether payment move to Rejected using "<ValueDateperiod>","<PaymentType>","<Reference>","<SubRef>","<ChequeNo>","<AccountNumber>"
-		Then validate whether payment moves to QueuedToOutfile status after Rejected status using "<ValueDateperiod>","<UpdatedPaymentType>","<Reference>","<SubRef>","<ChequeNo>","<AccountNumber>" 
-  	Then user checks the scheduler status and enables the scheduler
-   	Then validate whether payment moves to PendingAck status using "<ValueDateperiod>","<UpdatedPaymentType>","<Reference>","<SubRef>","<ChequeNo>","<AccountNumber>" 
+    Then validate whether payment moves to QueuedToOutfile status after Rejected status using "<ValueDateperiod>","<UpdatedPaymentType>","<Reference>","<SubRef>","<ChequeNo>","<AccountNumber>" 
+    Then user checks the scheduler status and enables the scheduler
+    Then validate whether payment moves to PendingAck status using "<ValueDateperiod>","<UpdatedPaymentType>","<Reference>","<SubRef>","<ChequeNo>","<AccountNumber>" 
  
     Examples: 
       | ValueDateperiod | PaymentType        | Reference | SubRef | ChequeNo | AccountNumber | ReasonCode1           | ReasonCode2          | ReasonCode3              | ReasonCode4             | ReasonCode5            | ReasonCode6     | ReasonCode7              | ReasonCode8                 | ReasonCode9   | ReasonCode10              | ReasonCode11  | ReasonCode12        | ReasonCode13                 | ReasonCode14                         | ReasonCode15                   |UpdatedPaymentType     |
-      |                 | ACH CHEQUE RECEIVE | Cheque No | EQUAL  | 30002275 |               | 01-Stop Payment Check | 02-Insufficient Fund | 04-The Account is closed | 05-Un-matched signature | 07-Un-endorsable check | 08-Missing date | 09-Presented before date | 10-Un-Authorized alteration | 11-Giro error | 14-Missing Clearing Stamp | 16-Wrong Date | 17-Collateral Check | 18-Witness Signature Missing | 15-Amount Numbers and Words mismatch | 23-Crossed check un-compliance |ACH CHEQUE RETURN SEND |   
+      |                 | ACH CHEQUE RECEIVE | Cheque No | EQUAL  | 30002374 |               | 01-Stop Payment Check | 02-Insufficient Fund | 04-The Account is closed | 05-Un-matched signature | 07-Un-endorsable check | 08-Missing date | 09-Presented before date | 10-Un-Authorized alteration | 11-Giro error | 14-Missing Clearing Stamp | 16-Wrong Date | 17-Collateral Check | 18-Witness Signature Missing | 15-Amount Numbers and Words mismatch | 23-Crossed check un-compliance |ACH CHEQUE RETURN SEND |   
       
        @TC_14_10_InwardPaymentReturnflowReturnfromInsufficientFund
    Scenario Outline: Inward Payment Return from InsufficientFund flow

@@ -11,11 +11,11 @@ import io.cucumber.junit.CucumberOptions;
 		,glue= {"StepDefinition"}
 		,monochrome=true
 		,dryRun=false
-	        ,tags="@TC_14_07_InwardPaymentReturnfromSignatureCheck"
+	        ,tags=" @TC_14_02_PositiveInwardFlow"
 		,plugin = {"pretty", "html:target/cucumber-html-report","json:target/cucumber-reports/Cucumber.json","junit:target/cucumber-reports/Cucumber.xml",
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
 		)
 
-public class TestRunner1 {
+public class TestRunner {
 
 }

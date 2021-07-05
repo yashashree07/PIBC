@@ -23,8 +23,9 @@ public class InwardPaymentFlowStepDefinition extends TestBase{
 	ChequeStopPage chequeStopPage;
 	SchedulePage schedulePage;
 	Windowhandle win;
+	SchedulePage schedulepage;
 	
-	@And("user validate whether payment move to QueuedToAccountVerification status using {string},{string},{string},{string},{string},{string},{string}")
+	@Given("user validate whether payment move to QueuedToAccountVerification status using {string},{string},{string},{string},{string},{string},{string}")
 	public void validate_whether_payment_move_to_QueuedToAccountVerification_status_using(String ValueDateperiod,String PaymentType, String Reference, String SubRef, String ChequeNo, String AccountNumber,String gpkey) throws InterruptedException {
 		driver.switchTo().frame("toc");
 		Thread.sleep(IntfConstants.SHORT_TIMEOUT);
@@ -47,7 +48,7 @@ public class InwardPaymentFlowStepDefinition extends TestBase{
 		paymentFlow=paymentFlow.checkInitialPaymentstatus(ValueDateperiod,PaymentType, Reference, SubRef, ChequeNo, AccountNumber);
 	}
 
-	@Then("user validate whether payment move to QueuedToInitialPosting status using {string},{string},{string},{string},{string},{string}")
+	@And("user validates whether payment move to QueuedToInitialPosting status using {string},{string},{string},{string},{string},{string}")
 	public void validate_whether_payment_move_to_QueuedToInitialPosting_status_using(String ValueDateperiod,String PaymentType, String Reference, String SubRef, String ChequeNo, String AccountNumber) throws InterruptedException {
 		paymentFlow=paymentFlow.movetoInitialPosting(ValueDateperiod, PaymentType, Reference, SubRef, ChequeNo, AccountNumber);
 	}
@@ -395,6 +396,8 @@ public class InwardPaymentFlowStepDefinition extends TestBase{
 
 	@Given("User is into the system")
 	public void user_is_into_the_system() throws InterruptedException {
+		//paymentFlow.logout();
+		driver.quit();
 		Initialization();
 		win = new Windowhandle(driver);
 		loginPage = new LoginPage();
@@ -588,5 +591,78 @@ public class InwardPaymentFlowStepDefinition extends TestBase{
 		paymentFlow=homePage.clickonApproveLink();
 		paymentFlow=paymentFlow.approvePayment(ValueDateperiod, PaymentType, Reference, SubRef, ChequeNo, AccountNumber);
 	}
+	
+	@Then("user validate whether payment moves to QueuedToAccountVerification status using {string},{string},{string},{string},{string},{string},{string}")
+	public void user_validate_whether_payment_moves_to_QueuedToAccountVerification_status_using(String ValueDateperiod,String PaymentType, String Reference, String SubRef, String ChequeNo, String AccountNumber,String gpkey) throws InterruptedException {
+		driver.switchTo().frame("toc");
+		Thread.sleep(IntfConstants.SHORT_TIMEOUT);
+		environmentPage=homePage.clickonEnvironmentRunLink();
+		environmentPage.clickonEnvironmentokbutton();
+		environmentPage.checkACH_Clearing_File_Input_Server();
+		environmentPage.checkACH_Clearing_Inward_Payment_Creation_Server();
+		environmentPage.CheckFile_Routing_Server();
+		Thread.sleep(IntfConstants.SHORT_TIMEOUT);
+		environmentPage.LogOut();
+		driver.quit();
+		Initialization();
+		win = new Windowhandle(driver);
+		loginPage = new LoginPage();
+		homePage = loginPage.login(prop.getProperty("username"), prop.getProperty("password"));
+		Thread.sleep(IntfConstants.TIMEOUT);
+		driver.switchTo().frame("toc");
+		Thread.sleep(IntfConstants.SHORT_TIMEOUT);
+		paymentFlow=homePage.checkPayment();
+		paymentFlow=paymentFlow.checkInitialPaymentstatus(ValueDateperiod,PaymentType, Reference, SubRef, ChequeNo, AccountNumber);
+	}
+	
+	
+	@Then("validate whether payment moves to QueuedToOutfile status after Rejected status using {string},{string},{string},{string},{string},{string}")
+	public void validate_whether_payment_moves_to_QueuedToOutfile_status_after_Rejected_status_using(String ValueDateperiod,String PaymentType,String Reference, String SubRef,String ChequeNo, String AccountNumber) throws InterruptedException {
+		Initialization();
+		win = new Windowhandle(driver);
+		loginPage = new LoginPage();
+		homePage = loginPage.login(prop.getProperty("username"), prop.getProperty("password"));
+		Thread.sleep(IntfConstants.TIMEOUT);
+		driver.switchTo().frame("toc");
+		paymentFlow=homePage.checkPayment();
+		paymentFlow=paymentFlow.checkPaymentstatus(ValueDateperiod,PaymentType, Reference, SubRef, ChequeNo, AccountNumber);
+		paymentFlow.logout();
+	}//end
+	
+	@Then("user checks the scheduler status and enables the scheduler")
+	public void user_checks_the_scheduler_status_and_enables_the_scheduler() throws InterruptedException
+	{
+		Initialization();
+		win = new Windowhandle(driver);
+		loginPage = new LoginPage();
+		homePage = loginPage.login(prop.getProperty("username"), prop.getProperty("password"));
+		driver.switchTo().frame("toc");
+		schedulepage=homePage.clickonScheduleControlLink();
+		schedulepage=schedulepage.checkSchedulerstatus();
+		Initialization();
+		win = new Windowhandle(driver);
+		loginPage = new LoginPage();
+		homePage = loginPage.login(prop.getProperty("username"), prop.getProperty("password"));
+		driver.switchTo().frame("toc");
+		schedulepage=homePage.clickonScheduleModifyLink();
+		schedulepage=schedulepage.modifyEGPS_CHEQUE_RETURN_OUTFILEScheduler();
+	}//end
+	
+	@Then("validate whether payment moves to PendingAck status using {string},{string},{string},{string},{string},{string}")
+	public void validate_whether_payment_moves_to_PendingAck_status(String ValueDateperiod,String PaymentType,String Reference, String SubRef,String ChequeNo, String AccountNumber ) throws InterruptedException
+	{
+		Initialization();
+		win = new Windowhandle(driver);
+		loginPage = new LoginPage();
+		homePage = loginPage.login(prop.getProperty("username"), prop.getProperty("password"));
+		driver.switchTo().frame("toc");
+		paymentFlow=homePage.checkPayment();
+		paymentFlow=paymentFlow.checkPaymentstatus(ValueDateperiod,PaymentType, Reference, SubRef, ChequeNo, AccountNumber);
+		paymentFlow.logout();
+	}//end
+
+	
+
+
 	
 }

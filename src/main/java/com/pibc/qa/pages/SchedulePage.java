@@ -139,6 +139,9 @@ public class SchedulePage extends TestBase{
 	@FindBy(xpath="//*[@id=\"pageBody\"]/table/tbody/tr/td/form/button/img")
 	WebElement logoutBtn;
 
+	@FindBy(xpath="//*[@id=\"headerTable\"]/tbody/tr[3]/td[2]/input")
+	WebElement serverStatusCheckbox;
+	
 	public SchedulePage() {
 		PageFactory.initElements(driver, this);
 	}
@@ -803,5 +806,38 @@ public class SchedulePage extends TestBase{
 		driver.quit();
 		return new SchedulePage();
 	}
+	
+	public SchedulePage modifyEGPS_CHEQUE_RETURN_OUTFILEScheduler() throws InterruptedException {
+		Thread.sleep(IntfConstants.SHORT_TIMEOUT);
+		okBtn.click();
+		Thread.sleep(IntfConstants.SHORT_TIMEOUT);
+		server3.click();
+		Thread.sleep(IntfConstants.SHORT_TIMEOUT);
+		boolean serverStatusCheckboxValue=serverStatusCheckbox.isSelected();
+		if(serverStatusCheckboxValue==true)
+		{
+			Thread.sleep(IntfConstants.SHORT_TIMEOUT);
+			submitBtn.click();
+			Thread.sleep(IntfConstants.SHORT_TIMEOUT);
+			okBtn.click();
+			System.out.println("EGPS_CHEQUE_RETURN_OUTFILE Scheduler is already in Running(Enabled) state ");
+		}
+		else
+		{	
+			Thread.sleep(IntfConstants.SHORT_TIMEOUT);
+			serverStatusCheckbox.click();
+			Thread.sleep(IntfConstants.SHORT_TIMEOUT);
+			submitBtn.click();
+			Thread.sleep(IntfConstants.SHORT_TIMEOUT);
+			okBtn.click();
+			System.out.println("EGPS_CHEQUE_RETURN_OUTFILE Scheduler Started");
+			
+		}
+		Thread.sleep(IntfConstants.SHORT_TIMEOUT);
+		logOutBtn.click();
+		logoutBtn.click();
+		driver.quit();
+		return new SchedulePage();
+	}//end of modifyEGPS_CHEQUE_RETURN_OUTFILESchedulerForOutwardPaymentFlow method
 
 }

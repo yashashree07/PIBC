@@ -43,7 +43,7 @@ Feature: Inward Payment flow feature
  
     Examples: 
       | ValueDateperiod | PaymentType        | Reference | SubRef | ChequeNo | AccountNumber | ReasonCode1           | ReasonCode2          | ReasonCode3              | ReasonCode4             | ReasonCode5            | ReasonCode6     | ReasonCode7              | ReasonCode8                 | ReasonCode9   | ReasonCode10              | ReasonCode11  | ReasonCode12        | ReasonCode13                 | ReasonCode14                         | ReasonCode15                   |UpdatedPaymentType     |
-      |                 | ACH CHEQUE RECEIVE | Cheque No | EQUAL  | 30002274 |               | 01-Stop Payment Check | 02-Insufficient Fund | 04-The Account is closed | 05-Un-matched signature | 07-Un-endorsable check | 08-Missing date | 09-Presented before date | 10-Un-Authorized alteration | 11-Giro error | 14-Missing Clearing Stamp | 16-Wrong Date | 17-Collateral Check | 18-Witness Signature Missing | 15-Amount Numbers and Words mismatch | 23-Crossed check un-compliance |ACH CHEQUE RETURN SEND |   
+      |                 | ACH CHEQUE RECEIVE | Cheque No | EQUAL  | 30001877 |               | 01-Stop Payment Check | 02-Insufficient Fund | 04-The Account is closed | 05-Un-matched signature | 07-Un-endorsable check | 08-Missing date | 09-Presented before date | 10-Un-Authorized alteration | 11-Giro error | 14-Missing Clearing Stamp | 16-Wrong Date | 17-Collateral Check | 18-Witness Signature Missing | 15-Amount Numbers and Words mismatch | 23-Crossed check un-compliance |ACH CHEQUE RETURN SEND |   
       
        @TC_14_10_InwardPaymentReturnflowReturnfromInsufficientFund
    Scenario Outline: Inward Payment Return from InsufficientFund flow
